@@ -12,7 +12,7 @@ object SimpleApp extends ZIOAppDefault:
         ZStream.from(stream.map(f).runCount.map(count => reportId -> count))
       }
 
-  def regroup[L, R, T](
+  def regroup(
       stream: ZStream[Any, Throwable, Driver]
   ): ZStream[Any, Throwable, (String, Long)] =
     countBy(stream, _.reportId).merge(countBy(stream, _.agency))
